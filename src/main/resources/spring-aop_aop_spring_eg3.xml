@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    spring config for package of "com.meacial.aop.spring.eg1"
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+
+    <!-- 开启spring-aop支持，默认关闭的-->
+    <aop:aspectj-autoproxy/>
+
+    <bean id="advice" class="com.meacial.aop.spring.eg3.MyAdvice"/>
+    <bean id="pointcut" class="com.meacial.aop.spring.eg3.MyPointcut"/>
+    <bean id="advisor" class="com.meacial.aop.spring.eg3.MyAdvisor">
+        <property name="advice" ref="advice"/>
+        <property name="pointcut" ref="pointcut"/>
+    </bean>
+
+    <bean id="service" class="com.meacial.aop.spring.eg3.MyService"/>
+
+</beans>

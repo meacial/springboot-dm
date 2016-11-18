@@ -1,0 +1,2 @@
+http://www.infoq.com/cn/articles/microframeworks1-spring-boot/
+http://javapapers.com/spring/spring-applicationcontext/

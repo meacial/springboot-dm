@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    spring config for package of "com.meacial.aop.spring.eg1"
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <!-- 开启spring-aop支持，默认关闭的-->
+    <aop:aspectj-autoproxy/>
+
+    <!--
+        下面通过配置组件扫描路径，将@Component注解组件，将他们注入到springcontext中，这些bean才会被spring所管理，才会执行AOP
+    -->
+    <!-- 设置扫描组件的包路径-->
+    <context:component-scan base-package="com.meacial.aop.spring.eg2"/>
+
+
+    <!-- 命名空间style配置AOP -->
+    <aop:config>
+        <aop:aspect id="myAspet" ref="log">
+            <aop:pointcut id="selectAllMethod" expression="execution(* com.meacial.aop.spring.eg2.*.*(..))"/>
+            <aop:before method="before" pointcut-ref="selectAllMethod"/>
+            <aop:after method="after" pointcut-ref="selectAllMethod"/>
+            <aop:after-returning method="afterReturning" returning="retVal" pointcut-ref="selectAllMethod"/>
+            <aop:after-throwing method="afterThrow" throwing="ex" pointcut-ref="selectAllMethod"/>
+            <aop:around method="around" pointcut-ref="selectAllMethod"/>
+        </aop:aspect>
+    </aop:config>
+
+
+
+
+
+
+</beans>
